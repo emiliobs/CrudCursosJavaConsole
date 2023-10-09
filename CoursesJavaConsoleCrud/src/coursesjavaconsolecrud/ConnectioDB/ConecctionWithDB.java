@@ -22,7 +22,7 @@ public class ConecctionWithDB
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(path, user, password);
-            System.out.println("Connected with DB.");
+            //System.out.println("Connected with DB.");
 
         }
         catch (Exception e)
