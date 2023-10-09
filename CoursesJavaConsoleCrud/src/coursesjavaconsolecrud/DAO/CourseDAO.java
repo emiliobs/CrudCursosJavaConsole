@@ -13,22 +13,22 @@ public class CourseDAO
 {
 
     Connection connection = null;
-    boolean flag;
 
     public boolean InsertCourse(Course course)
     {
-
+        boolean flag = false;
+        ConecctionWithDB conecctionWithDB = new ConecctionWithDB();
         String sql = "insert into cursos (name, instructor, price, fechaInicio) values(?,?,?,?)";
 
         try
         {
-            ConecctionWithDB conecctionWithDB = new ConecctionWithDB();
+
             PreparedStatement preparedStatement = conecctionWithDB.ConnectDB().prepareStatement(sql);
 
             preparedStatement.setString(1, course.getName());
             preparedStatement.setString(2, course.getInstructor());
             preparedStatement.setDouble(3, course.getPrice());
-           preparedStatement.setString(4, course.getFechaInicioString());
+            preparedStatement.setString(4, course.getFechaInicioString());
             if (preparedStatement.executeUpdate() == 1)
             {
                 flag = true;
@@ -39,17 +39,7 @@ public class CourseDAO
                 System.out.println("Sorry, The data could not be inserted!");
             }
 
-            if (preparedStatement.executeUpdate() == 1)
-            {
-                flag = true;
-                System.out.println("Course Inserted!");
-            }
-            else
-            {
-                System.out.println("Sorry Course doesn't inserted!");
-            }
-
-            conecctionWithDB.ConnectDB().close();
+           conecctionWithDB.ConnectDB().close();
 
         }
         catch (Exception e)

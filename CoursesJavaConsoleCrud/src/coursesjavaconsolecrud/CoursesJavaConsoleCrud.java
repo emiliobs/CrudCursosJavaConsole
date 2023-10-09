@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -68,13 +69,13 @@ public class CoursesJavaConsoleCrud
                     System.out.println("-----------------------------------------------------------------------------------------------");
                     System.out.println("--------------------------------------Insert New Data---------------------------------------");
                     System.out.println("-----------------------------------------------------------------------------------------------");
-                    System.out.print("Please Enter the Name of the New Course: ");
+                    System.out.print("Please Enter the Name of the New Course                      : ");
                     course.setName(scanner.next());
                     scanner.nextLine();
-                    System.out.print("Please Enter the Name of the Instructor: ");
+                    System.out.print("Please Enter the Name of the Instructor                      : ");
                     course.setInstructor(scanner.next());
                     scanner.nextLine();
-                    System.out.print("Please Enterthe Price of the Course: ");
+                    System.out.print("Please Enter the Price of the Course                         : ");
                     course.setPrice(Double.MAX_VALUE);
                     while (course.getPrice() == Double.MAX_VALUE)
                     {
@@ -93,7 +94,27 @@ public class CoursesJavaConsoleCrud
                             course.setPrice(Double.MAX_VALUE);
                             System.out.println("The price can be 0 but never less than 0");
                         }
-                    }                    
+                    }
+                    System.out.print("Please Enter the Course start Date in the format (dd/MM/yyyy): ");
+                    DateT = "";
+                    while (DateT.equals(""))
+                    {
+                        try
+                        {
+                            MaskFormatter formato = new MaskFormatter("##/##/####");
+                            String texto = scanner.next();
+                            dateP = (String) formato.stringToValue(texto.trim());
+                            DateT = dateP;
+                        }
+                        catch (Exception e)
+                        {
+                            System.out.println("Plese enter the date with format dd/MM/yyyy ");
+                            System.out.print("Insert the Date: ");
+                        }
+                    }
+                    course.setFechaInicio(DateT);
+                    courseDAO.InsertCourse(course);
+                    System.out.println("----------------------------------------");
                     break;
                 default:
                     System.out.println("Error. Please enter a number valid.");

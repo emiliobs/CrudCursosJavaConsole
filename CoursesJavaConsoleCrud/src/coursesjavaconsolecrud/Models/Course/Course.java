@@ -11,6 +11,7 @@ import java.util.zip.DataFormatException;
  */
 public class Course
 {
+
     private int id;
     private String name;
     private String instructor;
@@ -21,8 +22,6 @@ public class Course
     {
     }
 
-   
-    
     public Course(int id, String name, String instructor, double price, String fechaInicio)
     {
         this.id = id;
@@ -92,32 +91,32 @@ public class Course
     {
         return fechaInicio;
     }
+
     public String getFechaInicioString()
     {
         String date = "";
-        String format = "dd-MM-yyyy";
+        String format = "yyyy-MM-dd";
         DateFormat dateFormat = new SimpleDateFormat(format);
         date = dateFormat.format(getFechaInicio());
-        
-         return  date;
+
+        return date;
     }
 
     public void setFechaInicio(Date fechaInicio)
     {
         this.fechaInicio = fechaInicio;
     }
-    
-     public void setFechaInicioString(String fechaInicio)
+
+    public void setFechaInicio(String fechaInicio)
     {
         try
         {
-            this.fechaInicio= new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
+            this.fechaInicio = new SimpleDateFormat("dd/MM/yyyy").parse(fechaInicio);
         }
         catch (Exception e)
         {
             System.out.println("Error to convert the Date." + e.getMessage());
         }
     }
-    
-    
+
 }
